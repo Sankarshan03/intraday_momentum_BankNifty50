@@ -130,15 +130,6 @@ pip install pandas numpy matplotlib yfinance plotly
 
 ---
 
-## Key Changes in This Version
-
-1. **ATR Period**: Changed from 14 to **30** for more stable volatility measurement.
-2. **Market Regime Filter**: Added a market condition classification that only takes trades when the market is "Trending" (based on the 70th percentile of the dynamic smoothing factor).
-3. **Improved Signal Generation**: Signals are only generated when the market is in a Trending state, reducing whipsaw trades in flat markets.
-4. **Better Performance**: Gross annualized return improved from 22.52% to **32.46%** with lower drawdown.
-
----
-
 ## Limitations & Considerations
 
 - **Transaction Costs**: Assumes fixed 0.05% per side. Real‑world costs (slippage, brokerage, taxes) may be higher, as evidenced by the significant drop in performance post-cost.
