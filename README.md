@@ -100,30 +100,32 @@ pip install pandas numpy matplotlib yfinance plotly
 
 | Metric | Gross (No Cost) | Net (Post‑Cost) |
 |--------|-----------------|-----------------|
-| Annualized Return | 45.61% | 25.44% |
-| Max Drawdown | -8.82% | -11.60% |
-| Sharpe Ratio | 2.94 | 1.64 |
-| Sortino Ratio | 4.51 | 2.54 |
-| Calmar Ratio | 5.17 | 2.19 |
-| Hit Ratio | 34.17% | 32.12% |
-| Information Ratio | 1.36 | 0.72 |
+| Annualized Return | 22.52% | 4.66% |
+| Max Drawdown | -8.80% | -14.22% |
+| Sharpe Ratio | 1.47 | 0.30 |
+| Sortino Ratio | 1.94 | 0.40 |
+| Calmar Ratio | 2.56 | 0.33 |
+| Hit Ratio | 34.20% | 31.60% |
+| Information Ratio | 0.66 | -0.06 |
 
 **Walk‑Forward OOS Returns** (net of costs):
-- Window 1: -7.51%
-- Window 2: -1.78%
-- Window 3: +1.82%
+- Window 1: -6.78%
+- Window 2: -3.96%
+- Window 3: +3.32%
 
-> **Note**: The strategy shows strong gross performance but is sensitive to transaction costs. Walk‑forward results suggest limited out‑of‑sample consistency; further optimization (e.g., trend‑filtering or cost‑aware signal generation) may be needed.
+> **Note**: While the gross strategy shows positive performance, transaction costs significantly erode net returns. The walk‑forward results indicate limited out‑of‑sample consistency, suggesting the strategy may be sensitive to market regime changes and transaction costs. The negative information ratio post-cost indicates the strategy underperforms the benchmark on a risk-adjusted basis after accounting for trading costs.
 
 ---
 
 ## Limitations & Considerations
 
-- **Transaction Costs**: Assumes fixed 0.05% per side. Real‑world costs (slippage, brokerage, taxes) may be higher.
+- **Transaction Costs**: Assumes fixed 0.05% per side. Real‑world costs (slippage, brokerage, taxes) may be higher, as evidenced by the significant drop in performance post-cost.
 - **Data Frequency**: 1‑hour data may have gaps due to market holidays or intraday breaks.
 - **Look‑Ahead**: The walk‑forward analysis uses in‑sample optimization; but the optimal threshold is still chosen based on past data. Future performance may vary.
 - **Overfitting**: The strategy uses a simple crossover; more complex filters could improve robustness.
 - **Leverage**: The backtest assumes trading 1 unit per signal; leverage can amplify returns and drawdowns.
+- **Short Selling**: The strategy assumes ability to short the index, which may not be practical for all investors.
+- **Benchmark Underperformance**: The negative information ratio post-cost suggests the strategy does not add value beyond the benchmark once costs are considered.
 
 ---
 
@@ -134,4 +136,6 @@ pip install pandas numpy matplotlib yfinance plotly
 - Test on other indices or asset classes.
 - Include slippage and market impact models.
 - Optimize ATR period and threshold percentiles systematically.
-
+- Consider a long-only version to reduce transaction costs and allow for easier execution.
+- Incorporate volume or volatility filters to reduce false signals.
+- Explore machine learning approaches for regime detection.
