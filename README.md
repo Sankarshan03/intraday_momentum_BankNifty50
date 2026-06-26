@@ -140,7 +140,3 @@ pip install pandas numpy matplotlib yfinance plotly
 - Incorporate volume or volatility filters to reduce false signals.
 - Explore machine learning approaches for regime detection.
 
-
-## Author
-
-Created by [Your Name / Organization] – feel free to reach out for questions or collaboration.
