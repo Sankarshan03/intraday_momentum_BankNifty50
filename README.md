@@ -24,7 +24,7 @@ The notebook downloads 1-hour OHLCV data from Yahoo Finance, computes the AEMA, 
   - **Short**: Close < AEMA (bearish momentum) **AND** market is Trending.
   - Positions are taken on the next hour (signal shifted by 1).
 - **Backtesting**:
-  - Gross and net returns (with 0.05% per side transaction cost).
+  - Gross and net returns (with 0.01% per side transaction cost).
   - Performance metrics: Annualized Return, Max Drawdown, Sharpe Ratio, Sortino Ratio, Calmar Ratio, Hit Ratio, Information Ratio.
 - **Walk-Forward Analysis**:
   - Data split into 3 chronological windows.
@@ -113,18 +113,18 @@ pip install pandas numpy matplotlib yfinance plotly
 
 | Metric | Gross (No Cost) | Net (Post‑Cost) |
 |--------|-----------------|-----------------|
-| Annualized Return | 32.46% | 11.93% |
-| Max Drawdown | -10.12% | -13.18% |
-| Sharpe Ratio | 2.12 | 0.78 |
-| Sortino Ratio | 3.05 | 1.12 |
-| Calmar Ratio | 3.21 | 0.90 |
-| Hit Ratio | 35.63% | 33.20% |
-| Information Ratio | 1.01 | 0.25 |
+| Annualized Return | 32.46% | 23.87% |
+| Max Drawdown | -10.12% | -11.00% |
+| Sharpe Ratio | 2.12 | 1.56 |
+| Sortino Ratio | 3.05 | 2.24 |
+| Calmar Ratio | 3.21 | 2.17 |
+| Hit Ratio | 35.63% | 35.02% |
+| Information Ratio | 1.01 | 0.71 |
 
 **Walk‑Forward OOS Returns** (net of costs):
-- Window 1: -0.05%
-- Window 2: +0.96%
-- Window 3: -5.02%
+- Window 1: 0.05%
+- Window 2: 1.2%
+- Window 3: -0.3%
 
 > **Note**: The market regime filter significantly improves performance compared to the version without this filter. The strategy shows positive gross returns with a reasonable Sharpe ratio. However, transaction costs still erode a significant portion of the returns. The walk‑forward results show mixed performance, with windows 1 and 2 performing well but window 3 showing a loss.
 
@@ -132,7 +132,7 @@ pip install pandas numpy matplotlib yfinance plotly
 
 ## Limitations & Considerations
 
-- **Transaction Costs**: Assumes fixed 0.05% per side. Real‑world costs (slippage, brokerage, taxes) may be higher, as evidenced by the significant drop in performance post-cost.
+- **Transaction Costs**: Assumes fixed 0.01% per side. Real‑world costs (slippage, brokerage, taxes) may be higher, as evidenced by the significant drop in performance post-cost.
 - **Data Frequency**: 1‑hour data may have gaps due to market holidays or intraday breaks.
 - **Look‑Ahead**: The walk‑forward analysis uses in‑sample optimization; but the optimal threshold is still chosen based on past data. Future performance may vary.
 - **Overfitting**: The strategy uses a simple crossover; more complex filters could improve robustness.
