@@ -52,11 +52,10 @@ pip install pandas numpy matplotlib yfinance plotly
 
 1. **Run the notebook sequentially** from top to bottom.
 2. **Modify parameters**:
-   - `start_date` and `end_date` in cell 2.
+   - `start_date` and `end_date`.
    - `atr_period` (default **30**) in `calculate_dynamic_smoothing_factor()`.
-   - `threshold` (default **70th percentile**) for market condition classification in cell 243.
-   - `COST_PER_TRADE` (default 0.0005 = 0.05% per side) in cost modeling cell.
-   - Walk-forward threshold percentiles `[0.5, 0.6, 0.7, 0.8]` in cell 249.
+   - `COST_PER_TRADE` (default 0.0001 = 0.01% per side) in cost modeling cell.
+   - Walk-forward threshold percentiles `[0.5, 0.6, 0.7, 0.8]`
 
 3. **Interpret results**:
    - Check performance metrics table (gross vs net).
@@ -86,22 +85,17 @@ pip install pandas numpy matplotlib yfinance plotly
    - Normalize ATR to [0,1] to get dynamic smoothing factor.
    - Apply recursive EMA formula: `EMA_t = alpha * price_t + (1 - alpha) * EMA_{t-1}`.
 
-3. **Market Regime Classification**:
-   - Market is classified as **"Trending"** when `dynamic_smoothing_factor > threshold` (70th percentile).
-   - Market is classified as **"Flat"** otherwise.
-   - This filter helps avoid trading during sideways/choppy markets.
-
-4. **Signal Generation**:
+3. **Signal Generation**:
    - `signal = 1` if Close > AEMA **AND** market is Trending (long).
    - `signal = -1` if Close < AEMA **AND** market is Trending (short).
    - `signal = 0` if market is Flat (no position).
    - `position = signal.shift(1)` to avoid look‑ahead bias.
 
-5. **Backtesting**:
+4. **Backtesting**:
    - Strategy return = hourly_return × position.
    - Transaction costs applied when position changes (`trade_execution` flag).
 
-6. **Walk‑Forward Analysis**:
+5. **Walk‑Forward Analysis**:
    - Split data into 3 chronological chunks.
    - For each chunk, split into 70% in‑sample (IS) and 30% out‑of‑sample (OOS).
    - Find threshold that maximizes IS net return (by testing percentiles 0.5, 0.6, 0.7, 0.8).
@@ -138,8 +132,7 @@ pip install pandas numpy matplotlib yfinance plotly
 - **Overfitting**: The strategy uses a simple crossover; more complex filters could improve robustness.
 - **Leverage**: The backtest assumes trading 1 unit per signal; leverage can amplify returns and drawdowns.
 - **Short Selling**: The strategy assumes ability to short the index, which may not be practical for all investors.
-- **Regime Filter Sensitivity**: The 70th percentile threshold may need to be calibrated for different market conditions.
-- **Benchmark Performance**: The positive information ratio (0.25 net) suggests the strategy adds modest value beyond the benchmark.
+- **Benchmark Performance**: The positive information ratio (0.71 net) suggests the strategy adds modest value beyond the benchmark.
 
 ---
 
