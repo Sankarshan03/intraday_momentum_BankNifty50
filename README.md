@@ -2,7 +2,7 @@
 
 ## Overview
 
-This Jupyter notebook implements an **intraday momentum-based trading strategy** for the BankNifty index (^NSEBANK) using an **Adaptive Exponential Moving Average (AEMA)** with a **market regime filter**. The strategy dynamically adjusts its smoothing factor based on market volatility (Average True Range) and only takes trades during trending market conditions, making it more robust and selective.
+This Jupyter notebook implements an **intraday momentum-based trading strategy** for the BankNifty index (^NSEBANK) using an **Adaptive Exponential Moving Average (AEMA)**. The strategy dynamically adjusts its smoothing factor based on market volatility (Average True Range) and only takes trades during trending market conditions, making it more robust and selective.
 
 The notebook downloads 1-hour OHLCV data from Yahoo Finance, computes the AEMA, classifies market conditions, generates trading signals based on the AEMA crossover, backtests the strategy with and without transaction costs, and performs a walk-forward analysis to assess robustness.
 
