@@ -20,9 +20,9 @@ The notebook downloads 1-hour OHLCV data from Yahoo Finance, computes the AEMA, 
   - Classifies market as **"Trending"** or **"Flat"** based on the 70th percentile of the dynamic smoothing factor.
   - Only takes signals during **Trending** periods to avoid whipsaws in choppy markets.
 - **Trading Logic**:
-  - **Long**: Close > AEMA (bullish momentum) **AND** market is Trending.
-  - **Short**: Close < AEMA (bearish momentum) **AND** market is Trending.
-  - Positions are taken on the next hour (signal shifted by 1).
+  - **Long**: Close > AEMA (bullish momentum)
+  - **Short**: Close < AEMA (bearish momentum)
+  - Positions are taken on the next hour (signal shifted by 1, to avoid look-ahead bias).
 - **Backtesting**:
   - Gross and net returns (with 0.01% per side transaction cost).
   - Performance metrics: Annualized Return, Max Drawdown, Sharpe Ratio, Sortino Ratio, Calmar Ratio, Hit Ratio, Information Ratio.
